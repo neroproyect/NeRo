@@ -1311,7 +1311,8 @@ footer {
 
       /* Aseguramos que el contenido de debajo se mueva correctamente */
       box-sizing: border-box;
-  }
+  }´
+  
 
   /* Si quieres que esa franja sea exactamente igual en todos,
      ajusta el color al fondo de tu página (negro) */

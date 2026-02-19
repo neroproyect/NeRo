@@ -624,21 +624,30 @@ ANIMACIÓN DE SALTOS (IZQ - CENTRO - DER)
   padding-bottom: 60px;
 }
 
-.work-list {
-  border-top: 1px solid rgba(255,255,255,0.1);
-  margin-left: auto;
-  width: 85%;
-}
 
 .work-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 40px 0;
-  padding:
-  /*border-bottom: 1px solid rgba(255,255,255,0.1);*/
-  cursor: pointer;
-  transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    text-decoration: none; /* Quita el subrayado azul de los links */
+    color: inherit;       /* Mantiene el color blanco del texto */
+    cursor: pointer !important; /* ¡IMPORTANTE! Forzamos que aparezca la mano */
+    transition: opacity 0.3s;
+}
+
+/* Quitamos el "cursor: none" para que el usuario sepa que puede clicar */
+.work-item * {
+    pointer-events: none; /* Hace que los textos internos no bloqueen el clic del enlace */
+}
+
+.work-title { 
+    font-size: clamp(30px, 5vw, 60px); 
+    text-transform: uppercase; 
+    font-weight: 800; 
+    flex-grow: 1; 
+    margin-left: 50px;
 }
 
 .work-list:hover .work-item { opacity: 0.1; }
@@ -765,7 +774,7 @@ footer {
 .footer-brand {
     font-family: inherit;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 18px;
     color: #fff;
     margin-bottom: 20px;
     letter-spacing: 4px;
@@ -773,11 +782,11 @@ footer {
 
 .footer-info p {
     margin: 5px 0;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .footer-subtext {
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
     opacity: 0.6;
@@ -788,7 +797,7 @@ footer {
     margin-top: 30px;
     color: #fff;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 10px;
     border: 1px solid #333;
     padding: 8px 16px;
     transition: all 0.3s ease;
@@ -906,6 +915,85 @@ footer {
     }
 
     /* 4. HERO (TEXTO ABAJO Y CENTRADO) */
+    /* ============================================================
+   RESPONSIVE: WORK-LIST (Añadir al final de tu archivo CSS)
+   ============================================================ */
+@media (max-width: 768px) {
+    .projects {
+        padding: 40px 5%; /* Reducimos padding lateral en móvil */
+    }
+
+    .work-list {
+        width: 100%; /* Corregido el % vacío */
+    }
+
+    .work-item {
+        flex-direction: column; /* Apilamos los elementos uno encima de otro */
+        align-items: flex-start; /* Alineamos todo a la izquierda */
+        padding: 30px 0;
+        gap: 8px;
+    }
+
+    .work-title {
+        margin-left: 0 !important; /* Quitamos el margen de 50px que lo empujaba fuera */
+        font-size: 1.8rem; /* Tamaño más manejable para móvil */
+        line-height: 1.1;
+        width: 100%;
+    }
+
+    .work-category {
+        font-size: 10px;
+        color: #509fb3;
+        opacity: 0.8;
+    }
+
+    .work-year {
+        align-self: flex-start; /* El año debajo del título */
+        margin-top: 5px;
+    }
+
+    /* --- CURSOR Y PREVIEW EN MÓVIL --- */
+    .work-item, .work-item * {
+        cursor: pointer !important; /* En móvil volvemos al cursor normal */
+    }
+
+    .hover-preview {
+        display: none !important; /* Ocultamos la preview flotante, no funciona bien en touch */
+    }
+    
+    .work-list:hover .work-item { 
+        opacity: 1; /* Desactivamos el efecto de transparencia global en móvil para evitar confusión */
+    }
+}
+@media (max-width: 768px) {
+    /* La caja de preview ahora será fija en el móvil */
+    .hover-preview {
+        display: none; /* Por defecto oculta */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+        width: 80vw;
+        height: auto;
+        z-index: 1000;
+        pointer-events: none; /* Para que no bloquee el clic */
+        border: 2px solid #509fb3;
+        background: black;
+    }
+
+    /* Clase que activamos con el JS */
+    .hover-preview.mobile-visible {
+        display: block;
+        opacity: 1 !important;
+    }
+
+    /* Ajuste de imagen dentro de la preview móvil */
+    .hover-preview img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
     /* ============================================================
        CORRECCIÓN FINAL HERO MÓVIL (Centrado absoluto)
        ============================================================ */

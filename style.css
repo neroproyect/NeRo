@@ -189,7 +189,7 @@ header.menu-active {
    ========================================= */
 
 .about-page-container {
-    padding: 140px 10% 80px 10%; /* Sangría amplia */
+    padding: 140px 10% 80px 10%;
     color: #fff;
     max-width: 1600px;
     margin: 0 auto;
@@ -197,34 +197,44 @@ header.menu-active {
 
 .profile-section {
     display: grid;
-    grid-template-columns: 350px 1fr; /* Columna fija para foto, resto para texto */
+    /* En PC: 350px para la foto, el resto para el texto */
+    grid-template-columns: 350px 1fr; 
     gap: 80px;
     margin-bottom: 100px;
+    align-items: start;
 }
 
-/* --- FOTO DE PERFIL --- */
+/* --- CONTENEDOR DE FOTO Y BADGE --- */
 .profile-image {
-    position: relative; /* Para posicionar el badge */
     display: flex;
-    flex-direction: column; /* Apila Foto, Badge y GIF verticalmente */
+    flex-direction: column; 
+    align-items: center; /* ESTO centra la foto y el badge entre sí */
+    text-align: center;
 }
 
-/* Estilo para tu foto (No afecta al GIF) */
-.profile-image img:not(.jumping-gif) {
+.profile-careto {
+    width: 100%;
+    max-width: 350px; /* Evita que la foto crezca de más */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Estilo específico para tu foto de perfil */
+.fotoPerfil {
     width: 100%;
     height: auto;
-    filter: grayscale(100%);
-    transition: filter 0.5s ease;
-    border-radius: 2px;
+    border-radius: 1px;
+    object-fit: cover;
+    /* Hemos eliminado el filtro grayscale y la transición */
 }
 
-.profile-image:hover img:not(.jumping-gif) {
+.profile-image:hover .fotoPerfil {
     filter: grayscale(0%);
 }
 
 /* Badge de "Open to Work" */
 .status-badge {
-    margin-top: 150px;
+    margin-top: -170px;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -232,6 +242,44 @@ header.menu-active {
     display: flex;
     align-items: center;
     gap: 8px;
+    justify-content: center;
+}
+
+/* ============================================================
+   RESPONSIVE (MÓVIL)
+   ============================================================ */
+@media (max-width: 992px) {
+    .profile-section {
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        gap: 40px;
+    }
+
+    .about-page-container {
+        padding: 100px 5% 40px 5%; /* Menos padding lateral */
+    }
+
+    .profile-image {
+        order: -1; /* Asegura que la foto salga ARRIBA del texto */
+    }
+
+    .profile-careto {
+        max-width: 300px; /* Un poco más pequeña en móvil para que luzca mejor */
+    }
+    /* 1. Eliminamos el GIF por completo en móvil */
+    .jumping-gif {
+        display: none !important;
+    }
+
+    /* 2. Compactamos el espacio del badge para que no quede hueco negro */
+    .status-badge {
+        margin-top: -150px !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* 3. Ajustamos el contenedor para que el texto suba más */
+    .profile-image {
+        margin-bottom: 20px !important;
+    }
 }
 
 /* --- ESTILO DEL GIF DE GOKU --- */
@@ -240,6 +288,7 @@ header.menu-active {
 }
 
 .jumping-gif {
+    margin-top: 850px;
     display: block;
     width: 130px;    /* Tu ancho solicitado */
     height: 130px;

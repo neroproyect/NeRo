@@ -170,6 +170,7 @@ header.menu-active {
   transition: color 0.3s ease, transform 0.3s ease;
 }
 .submenu strong{
+    font-size: 11px;
   color: #454545;
 }
 .submenu a:hover {
@@ -957,8 +958,8 @@ footer {
 
     /* Categorías (Concept, Environment, etc) */
     .submenu-column h3 {
-        font-size: 11px !important;
-        color: #555 !important;
+        font-size: 13px !important;
+        color: #8c8c8c !important;
         margin-bottom: 10px !important;
         border: none !important;
     }
